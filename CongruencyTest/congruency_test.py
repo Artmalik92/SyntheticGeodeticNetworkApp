@@ -1131,13 +1131,16 @@ def main() -> None:
     # WLS статус
     wls_status = str(input('Нужна ли линейная регрессия \nда - 1\nнет - 0\n '))
 
-    # размер окна
-    window_size = str(input('Размер окна: '))
+    window_size = '0'
+
+    if wls_status == '1':
+        # размер окна
+        window_size = str(input('Размер окна линейной регрессии (в минутах): '))
 
     # обработка координат при помощи МНК
-    Q_status = str(input('Матрица Q (в лин регрессии)\nединичная - 1\nс ковариациями - 0\n'))
-    Qdd_status = str(input('Матрица Qdd (в хи-тесте)\nединичная - 1\nс ковариациями - 0\n'))
-    m_coef = float(input('Масштабный коэффициент: '))
+    Q_status = '0'
+    Qdd_status = '0'
+    m_coef = float(input('Масштабный коэффициент (для p-value, по умолчанию задать 1): '))
 
     # Выполнение линейной регрессии
     wls, raw, filtered, Qv, mu_mean_df, MU = test.perform_wls(df=df, window_size=window_size, sigma_0=0.05,

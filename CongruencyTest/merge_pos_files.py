@@ -156,17 +156,22 @@ def makefile(directory: str,
     return merged_df
 
 
+user_input = input("Введите названия станций через запятую: ")
+point_names = [name.strip() for name in user_input.split(",")]
+
+directory_input = input("Введите директорию с файлами измерений: ")
+
 #zero_epoch_coordinates = json.load(open('2024-08-29/first_epoch.json'))
 # "SNSK00RUS", "SNSK01RUS", "SNSK02RUS", "SNSK03RUS", "BUZZ"
 # "NSK1", "NOVM", "NSKP", "NSVB", "NVS2" "ST01", "ST02", "ST03", "ST04"
-merged_data = makefile(point_names=["SNSK00RUS", "SNSK01RUS", "SNSK02RUS", "SNSK03RUS", "BUZZ"],
+merged_data = makefile(point_names=point_names,
                        zero_epoch_coords=None,
                        dropna=False,
-                       directory='2024-08-29-last',
+                       directory=directory_input ,
                        resample_interval=None,
                        fixed_solution_only=False)
 
-merged_data.to_csv('Data/input_files/2024-08-29-last.csv', sep=';', index=False)
+merged_data.to_csv('Data/input_files/merged_pos.csv', sep=';', index=False)
 
 print('Done')
 
